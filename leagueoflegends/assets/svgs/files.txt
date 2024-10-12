@@ -1,0 +1,1 @@
+static const chatSvg = 'leagueoflegends/assets/svgs/chat.svg';
