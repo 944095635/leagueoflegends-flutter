@@ -7,6 +7,8 @@
 
 <img src="https://raw.githubusercontent.com/944095635/leagueoflegends-flutter/master/images/LOL.png" width='600'>
 
+<img src="https://raw.githubusercontent.com/944095635/leagueoflegends-flutter/master/images/LOL1.png" width='600'>
+
 | 平台 | 支持 | 说明 | 下载 |
 | -------- | ----- | ----- | ---- |
 | Android Pad    | ✅    | 平板 Tablet 电视 TV  | [-](https://github.com/) |
