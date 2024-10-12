@@ -1,6 +1,9 @@
 # 英雄联盟 LOL - leagueoflegends
 
-Flutter 编写，定期更新中，最近更新 2024-10-12
+### Flutter 编写，定期更新中，最近更新 2024-10-12
+
+
+### Flutter 技术交流QQ群 ：623512997
 
 <img src="https://raw.githubusercontent.com/944095635/leagueoflegends-flutter/master/images/demo_2024_10_12.jpg" width='600'>
 
