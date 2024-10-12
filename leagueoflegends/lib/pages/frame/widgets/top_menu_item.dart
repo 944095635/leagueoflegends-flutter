@@ -27,34 +27,37 @@ abstract class TopMenuItem extends StatelessWidget {
         onTap?.call(index);
       },
       behavior: HitTestBehavior.opaque,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: selectd
-              ? const LinearGradient(
-                  colors: [
-                    Colors.transparent,
-                    SystemColors.themeColor20,
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                )
-              : null,
-        ),
-        child: Stack(
-          fit: StackFit.passthrough,
-          children: [
-            if (selectd)
-              Positioned(
-                left: 0,
-                top: 2,
-                right: 0,
-                child: Image.asset(
-                  AssetsImages.menuSelected,
-                  height: 12,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: selectd
+                ? const LinearGradient(
+                    colors: [
+                      Colors.transparent,
+                      SystemColors.themeColor20,
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  )
+                : null,
+          ),
+          child: Stack(
+            fit: StackFit.passthrough,
+            children: [
+              if (selectd)
+                Positioned(
+                  left: 0,
+                  top: 2,
+                  right: 0,
+                  child: Image.asset(
+                    AssetsImages.menuSelected,
+                    height: 12,
+                  ),
                 ),
-              ),
-            buildView(),
-          ],
+              buildView(),
+            ],
+          ),
         ),
       ),
     );

@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_styled/size_extension.dart';
-import 'package:get/get.dart';
 import 'package:leagueoflegends/common/values/images.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_divider.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_horizontal_item.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_vertical_item.dart';
+import 'package:leagueoflegends/pages/frame/widgets/top_play_button.dart';
 
 /// 顶部菜单
 class TopMenu extends StatefulWidget {
@@ -20,7 +20,7 @@ class _TopMenuState extends State<TopMenu> {
   @override
   void initState() {
     super.initState();
-    selectIndex = 0;
+    selectIndex = 1;
   }
 
   @override
@@ -29,19 +29,8 @@ class _TopMenuState extends State<TopMenu> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         28.horizontalSpace,
-        Image.asset(
-          AssetsImages.lolLogo,
-          width: 42,
-          height: 42,
-        ),
-        30.horizontalSpace,
-        const Center(
-          child: Text(
-            "PLAY",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        120.horizontalSpace,
+        const TopPlayButton(),
+        65.horizontalSpace,
         TopMenuHorizontalItem(
           title: "主页",
           index: 1,

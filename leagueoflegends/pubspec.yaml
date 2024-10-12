@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   get: ^4.6.6
   window_manager: ^0.4.2
+  flutter_svg: ^2.0.10+1
   flutter_styled:    #布局样式
     git: 
        url: https://github.com/DMSkin/flutter_styled.git
