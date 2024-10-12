@@ -1,0 +1,25 @@
+
+      GetPage(
+        name: RouteNames.cloud,
+        page: () => const CloudPage(),
+      ),
+      GetPage(
+        name: RouteNames.frame,
+        page: () => const FramePage(),
+      ),
+      GetPage(
+        name: RouteNames.home,
+        page: () => const HomePage(),
+      ),
+      GetPage(
+        name: RouteNames.play,
+        page: () => const PlayPage(),
+      ),
+      GetPage(
+        name: RouteNames.settings,
+        page: () => const SettingsPage(),
+      ),
+      GetPage(
+        name: RouteNames.store,
+        page: () => const StorePage(),
+      ),

@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_styled/size_extension.dart';
+import 'package:get/get.dart';
+import 'package:leagueoflegends/common/routers/names.dart';
 import 'package:leagueoflegends/common/values/images.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_divider.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_horizontal_item.dart';
@@ -29,7 +31,13 @@ class _TopMenuState extends State<TopMenu> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         28.horizontalSpace,
-        const TopPlayButton(),
+        TopPlayButton(
+          onTap: () {
+            selectIndex = 0;
+            setState(() {});
+            Get.offNamed(RouteNames.play, id: 1);
+          },
+        ),
         65.horizontalSpace,
         TopMenuHorizontalItem(
           title: "主页",
@@ -82,5 +90,13 @@ class _TopMenuState extends State<TopMenu> {
   void onTapMenu(int index) {
     selectIndex = index;
     setState(() {});
+
+    if (index == 1) {
+      Get.offNamed(RouteNames.home, id: 1);
+    } else if (index == 2) {
+      Get.offNamed(RouteNames.cloud, id: 1);
+    }else if (index == 6) {
+      Get.offNamed(RouteNames.store, id: 1);
+    }
   }
 }

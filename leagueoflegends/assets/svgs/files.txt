@@ -1,1 +1,0 @@
-static const playButtonSvg = 'leagueoflegends/assets/svgs/play_button.svg';

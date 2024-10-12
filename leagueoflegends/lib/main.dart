@@ -20,7 +20,7 @@ void main() async {
     WindowOptions windowOptions = const WindowOptions(
       size: Size(1280, 720),
       center: true,
-      maximumSize: Size(1280, 720),
+      //maximumSize: Size(1280, 720),
       minimumSize: Size(1280, 720),
       backgroundColor: Colors.black,
       titleBarStyle: TitleBarStyle.hidden,
@@ -63,6 +63,7 @@ class MyApp extends StatelessWidget {
           thickness: 1,
         ),
       ),
+      debugShowCheckedModeBanner: false,
       home: const FramePage(),
     );
   }

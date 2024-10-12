@@ -6,7 +6,12 @@ import 'package:leagueoflegends/common/index.dart';
 
 /// 顶部开始游戏按钮
 class TopPlayButton extends StatefulWidget {
-  const TopPlayButton({super.key});
+  const TopPlayButton({
+    super.key,
+    this.onTap,
+  });
+
+  final Function? onTap;
 
   @override
   State<TopPlayButton> createState() => _TopPlayButtonState();
@@ -19,6 +24,7 @@ class _TopPlayButtonState extends State<TopPlayButton> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 160,
+      height: 80,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -26,28 +32,33 @@ class _TopPlayButtonState extends State<TopPlayButton> {
             left: 32,
             right: 0,
             top: 22,
-            bottom: 22,
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              onEnter: (event) {
-                setState(() {
-                  hover = true;
-                });
+            bottom: 23,
+            child: GestureDetector(
+              onTap: () {
+                widget.onTap?.call();
               },
-              onExit: (event) {
-                setState(() {
-                  hover = false;
-                });
-              },
-              child: CustomPaint(
-                painter: PlayPainter(hover),
-                child: const Center(
-                  child: Text(
-                    "PLAY",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Color(0xFFe7decb),
-                      fontWeight: FontWeight.bold,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                onEnter: (event) {
+                  setState(() {
+                    hover = true;
+                  });
+                },
+                onExit: (event) {
+                  setState(() {
+                    hover = false;
+                  });
+                },
+                child: CustomPaint(
+                  painter: PlayPainter(hover),
+                  child: const Center(
+                    child: Text(
+                      "PLAY",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFFe7decb),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -123,7 +134,7 @@ class PlayPainter extends CustomPainter {
     borde3.lineTo(3 * gap, size.height - gap);
     //borde3.lineTo(gap, gap);
     borde3.arcTo(
-      Rect.fromLTWH(gap, gap, 14, size.height - 2 * gap),
+      Rect.fromLTWH(gap, gap, 13, size.height - 2 * gap),
       3 * pi / 2,
       pi,
       true,

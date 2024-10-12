@@ -1,10 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_styled/radius_extension.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:leagueoflegends/common/style/colors.dart';
-import 'package:leagueoflegends/pages/frame/view.dart';
 
 /// 头像
 class TopAvatar extends StatelessWidget {

@@ -28,28 +28,17 @@ class FramePage extends GetView<FrameController> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          _buildBackground(),
-          // 半透明黑色渐变蒙版
-          const DecoratedBox(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.black,
-                  Colors.black54,
-                  Colors.black12,
-                  Colors.black12,
-                ],
-              ),
-            ),
+          Navigator(
+            key: Get.nestedKey(1),
+            initialRoute: RouteNames.home,
+            onGenerateRoute: RoutePages.onGenerateRoute,
           ),
           Column(
             children: [
               _buildAppBar(context),
               const Divider(height: 1),
             ],
-          ),
+          )
         ],
       ),
     );
@@ -127,11 +116,11 @@ class FramePage extends GetView<FrameController> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           10.horizontalSpace,
-          TopAvatar(
+          const TopAvatar(
             avatar: AssetsImages.cardKaisa,
           ),
           10.horizontalSpace,
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -155,26 +144,5 @@ class FramePage extends GetView<FrameController> {
         ],
       ),
     );
-  }
-
-  // 主视图
-  Widget _buildView(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(color: Theme.of(context).primaryColor),
-        ),
-      ),
-      child: const SizedBox.expand(
-        child: Text(
-          "xxx",
-          style: TextStyle(color: Colors.red),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBackground() {
-    return Image.asset(AssetsImages.yasuo);
   }
 }
