@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_styled/size_extension.dart';
 import 'package:get/get.dart';
 import 'package:leagueoflegends/common/index.dart';
-import 'package:leagueoflegends/pages/frame/widgets/top_play_button.dart';
+import 'package:leagueoflegends/common/widgets/play_button/play_button.dart';
 
 import 'index.dart';
 
@@ -94,7 +94,9 @@ class PlayPage extends GetView<PlayController> {
           ),
           const Spacer(),
           const Center(
-            child: TopPlayButton(),
+            child: PlayButton(
+              text: "确认",
+            ),
           ),
           20.verticalSpace,
         ],

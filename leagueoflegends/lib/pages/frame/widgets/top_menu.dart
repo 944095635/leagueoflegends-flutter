@@ -3,10 +3,10 @@ import 'package:flutter_styled/size_extension.dart';
 import 'package:get/get.dart';
 import 'package:leagueoflegends/common/routers/names.dart';
 import 'package:leagueoflegends/common/values/images.dart';
+import 'package:leagueoflegends/common/widgets/play_button/play_button.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_divider.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_horizontal_item.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_vertical_item.dart';
-import 'package:leagueoflegends/pages/frame/widgets/top_play_button.dart';
 
 /// 顶部菜单
 class TopMenu extends StatefulWidget {
@@ -28,15 +28,10 @@ class _TopMenuState extends State<TopMenu> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         28.horizontalSpace,
-        TopPlayButton(
-          onTap: () {
-            selectIndex = 0;
-            setState(() {});
-            Get.offNamed(RouteNames.play, id: 1);
-          },
+        const PlayButton(
+          text: "PLAY",
         ),
         65.horizontalSpace,
         TopMenuHorizontalItem(
@@ -95,7 +90,7 @@ class _TopMenuState extends State<TopMenu> {
       Get.offNamed(RouteNames.home, id: 1);
     } else if (index == 2) {
       Get.offNamed(RouteNames.cloud, id: 1);
-    }else if (index == 6) {
+    } else if (index == 6) {
       Get.offNamed(RouteNames.store, id: 1);
     }
   }
