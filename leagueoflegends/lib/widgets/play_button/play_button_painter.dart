@@ -57,7 +57,7 @@ class PlayButtonPainter extends CustomPainter {
     Paint arrowPaint = Paint()
       ..shader = progress == 1 ? playColor : playHoverColor
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
+      ..strokeWidth = 1.5;
     canvas.drawPath(arrowPath, arrowPaint);
 
     if (progress < 1) {

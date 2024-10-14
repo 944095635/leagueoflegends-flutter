@@ -41,9 +41,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'League of Legends',
       theme: ThemeData(
-        colorScheme: const ColorScheme.dark(primary: SystemColors.themeColor),
-      ),
-      darkTheme: ThemeData(
         fontFamily: "MiSans",
         primaryColor: SystemColors.themeColor,
         colorScheme: const ColorScheme.dark(

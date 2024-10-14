@@ -4,8 +4,10 @@ import 'package:flutter_styled/size_extension.dart';
 import 'package:flutter_styled/padding_extension.dart';
 import 'package:get/get.dart';
 import 'package:leagueoflegends/common/index.dart';
+import 'package:leagueoflegends/common/style/colors.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_avatar.dart';
-import 'package:leagueoflegends/pages/frame/widgets/top_menu.dart';
+import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu.dart';
+import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_type.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_money.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -49,9 +51,9 @@ class FramePage extends GetView<FrameController> {
       height: 82,
       width: double.infinity,
       child: DecoratedBox(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
-            top: BorderSide(color: Theme.of(context).primaryColor, width: 2.5),
+            top: BorderSide(color: SystemColors.themeColor, width: 2.5),
           ),
         ),
         child: Stack(
@@ -60,7 +62,7 @@ class FramePage extends GetView<FrameController> {
             const DragToMoveArea(child: SizedBox()),
             Row(
               children: [
-                const TopMenu(),
+                TopMenu(onChangeMenu: onChangeMenu),
                 20.horizontalSpace,
                 _buildMoney(),
                 const Spacer(),
@@ -144,5 +146,24 @@ class FramePage extends GetView<FrameController> {
         ],
       ),
     );
+  }
+
+  /// 切换菜单
+  void onChangeMenu(TopMenuType menu) {
+    String newRoutes;
+    switch (menu) {
+      case TopMenuType.play:
+        newRoutes = RouteNames.play;
+        break;
+      case TopMenuType.home:
+        newRoutes = RouteNames.home;
+        break;
+      default:
+        newRoutes = RouteNames.store;
+    }
+
+    if (newRoutes.isNotEmpty && Get.currentRoute != newRoutes) {
+      Get.offNamed(newRoutes, id: 1);
+    }
   }
 }

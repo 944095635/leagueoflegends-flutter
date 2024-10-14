@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_styled/size_extension.dart';
 import 'package:leagueoflegends/common/style/colors.dart';
-import 'package:leagueoflegends/pages/frame/widgets/top_menu_item.dart';
+import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_item.dart';
 
 /// 顶部菜单 小型 + 图标
 class TopMenuVerticalItem extends TopMenuItem {
@@ -11,7 +11,7 @@ class TopMenuVerticalItem extends TopMenuItem {
     required this.image,
     required super.title,
     super.selectd = false,
-    required super.index,
+    required super.menu,
   });
 
   final String image;

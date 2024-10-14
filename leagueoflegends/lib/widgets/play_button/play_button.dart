@@ -10,9 +10,13 @@ class PlayButton extends StatefulWidget {
   const PlayButton({
     super.key,
     required this.text,
+    this.onTap,
   });
 
-  final String text;
+  final Widget text;
+
+  /// 点击事件
+  final Function()? onTap;
 
   @override
   State<PlayButton> createState() => _PlayButtonState();
@@ -81,70 +85,70 @@ class _PlayButtonState extends State<PlayButton>
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           width: 165,
           height: 40,
-          padding: const EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            color: const Color(0xFF010a13),
-            borderRadius: BorderRadius.horizontal(left: 20.radius),
-            border: Border.all(
-              color: const Color(0xFF34291E),
-            ),
-          ),
           child: DecoratedBox(
             decoration: BoxDecoration(
+              color: const Color(0xFF010a13),
               borderRadius: BorderRadius.horizontal(left: 20.radius),
               border: Border.all(
-                color: const Color(0xFF09343D),
+                color: const Color(0xFF34291E),
               ),
             ),
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                onEnter: (event) {
-                  hover = true;
-                  if (!_controller.isAnimating) {
-                    //debugPrint("onEnter");
-                    _controller.repeat();
-                  }
-                },
-                onExit: (event) async {
-                  hover = false;
-                  await Future.delayed(Durations.long1);
-                  if (!hover) {
-                    _controller.reset();
-                  }
-                },
-                child: SizedBox(
-                  width: 120,
-                  height: 30,
-                  child: AnimatedBuilder(
-                    animation: _animation,
-                    builder: (context, child) {
-                      //debugPrint("重绘");
-                      for (var light in _lights) {
-                        light.doMove();
-                      }
-                      return CustomPaint(
-                        painter: PlayButtonPainter(
-                          _animation.value,
-                          _lights,
+            child: Padding(
+              padding: const EdgeInsets.all(4),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.horizontal(left: 20.radius),
+                  border: Border.all(
+                    width: 2,
+                    color: const Color(0xFF09343D),
+                  ),
+                ),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                    onTap: widget.onTap,
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      onEnter: (event) {
+                        hover = true;
+                        if (!_controller.isAnimating) {
+                          //debugPrint("onEnter");
+                          _controller.repeat();
+                        }
+                      },
+                      onExit: (event) async {
+                        hover = false;
+                        await Future.delayed(Durations.long1);
+                        if (!hover) {
+                          _controller.reset();
+                        }
+                      },
+                      child: SizedBox(
+                        width: 120,
+                        height: 30,
+                        child: AnimatedBuilder(
+                          animation: _animation,
+                          builder: (context, child) {
+                            //debugPrint("重绘");
+                            for (var light in _lights) {
+                              light.doMove();
+                            }
+                            return CustomPaint(
+                              painter: PlayButtonPainter(
+                                _animation.value,
+                                _lights,
+                              ),
+                              child: Center(
+                                child: widget.text,
+                              ),
+                            );
+                          },
                         ),
-                        child: Center(
-                          child: Text(
-                            widget.text,
-                            textHeightBehavior: const TextHeightBehavior(
-                              applyHeightToLastDescent: false,
-                            ),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+                      ),
+                    ),
                   ),
                 ),
               ),

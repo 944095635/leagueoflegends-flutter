@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_styled/size_extension.dart';
 import 'package:get/get.dart';
 import 'package:leagueoflegends/common/index.dart';
-import 'package:leagueoflegends/widgets/play_button/play_button.dart';
 
 import 'index.dart';
 
@@ -76,9 +75,9 @@ class PlayPage extends GetView<PlayController> {
           160.verticalSpace,
           Row(
             children: [
-              _buildItem(AssetsImages.play1, "5v5", "召唤师峡谷"),
+              _buildItem(AssetsImages.playGame1Png, "5v5", "召唤师峡谷"),
               80.horizontalSpace,
-              _buildItem(AssetsImages.play2, "5v5", "极地大乱斗"),
+              _buildItem(AssetsImages.playGame2Png, "5v5", "极地大乱斗"),
             ],
           ),
           30.verticalSpace,
@@ -93,11 +92,6 @@ class PlayPage extends GetView<PlayController> {
             ),
           ),
           const Spacer(),
-          const Center(
-            child: PlayButton(
-              text: "确认",
-            ),
-          ),
           20.verticalSpace,
         ],
       ),

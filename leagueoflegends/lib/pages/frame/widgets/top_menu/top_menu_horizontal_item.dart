@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:leagueoflegends/common/style/colors.dart';
-import 'package:leagueoflegends/pages/frame/widgets/top_menu_item.dart';
+import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_item.dart';
 
-/// 首页 - 顶部菜单
+/// 首页 - 顶部菜单 - 大型
 class TopMenuHorizontalItem extends TopMenuItem {
   const TopMenuHorizontalItem({
     super.key,
     super.onTap,
+    required super.menu,
     required super.title,
     super.selectd = false,
-    required super.index,
   });
 
   @override
