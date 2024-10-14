@@ -13,33 +13,32 @@ class AddButton extends StatefulWidget {
 }
 
 class _AddButtonState extends State<AddButton> {
-  bool mouseEnter = false;
+  /// 绘制器
+  final AddButtonPainter painter = AddButtonPainter();
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (event) {
-        mouseEnter = true;
-        setState(() {});
+        painter.update(true);
       },
       onExit: (event) {
-        mouseEnter = false;
-        setState(() {});
+        painter.update(false);
       },
       child: ConstrainedBox(
         constraints: const BoxConstraints(minHeight: 17, minWidth: 17),
         child: CustomPaint(
-          painter: AddButtonPainter(mouseEnter),
+          painter: painter,
         ),
       ),
     );
   }
 }
 
-class AddButtonPainter extends CustomPainter {
-  const AddButtonPainter(this.mouseEnter);
-  final bool mouseEnter;
+class AddButtonPainter extends ChangeNotifier implements CustomPainter {
+  AddButtonPainter();
+
   @override
   bool shouldRepaint(covariant AddButtonPainter oldDelegate) {
     return mouseEnter != oldDelegate.mouseEnter;
@@ -48,7 +47,6 @@ class AddButtonPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()..color = const Color(0xFF252a29);
-
     canvas.drawOval(
       Rect.fromLTWH(
         0,
@@ -98,5 +96,25 @@ class AddButtonPainter extends CustomPainter {
     Path drawplusPath = Path();
     drawplusPath = plusPath.transform(matrix.storage);
     canvas.drawPath(drawplusPath, plusPaint);
+  }
+
+  @override
+  bool? hitTest(Offset position) {
+    return true;
+  }
+
+  @override
+  SemanticsBuilderCallback? get semanticsBuilder => null;
+
+  @override
+  bool shouldRebuildSemantics(CustomPainter oldDelegate) => false;
+
+  /// 鼠标进入
+  bool mouseEnter = false;
+
+  /// 更新
+  void update(bool newMouseEnter) {
+    mouseEnter = newMouseEnter;
+    notifyListeners();
   }
 }
