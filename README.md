@@ -1,9 +1,9 @@
 # 英雄联盟 LOL - leagueoflegends
 
-### Flutter 编写，被人怼了，不想写了，最近更新 2024-10-12
+#### Flutter 编写，不定时更新，最近更新 2024-10-15
 
 
-### Flutter 技术交流QQ群 ：623512997
+#### Flutter 技术交流QQ群 ：623512997
 
 <img src="https://raw.githubusercontent.com/944095635/leagueoflegends-flutter/master/images/LOL.png" width='600'>
 
@@ -46,4 +46,23 @@ Path drawplusPath = Path();
 // 绘制PATH
 drawplusPath = plusPath.transform(matrix.storage);
 canvas.drawPath(drawplusPath, plusPaint);
+```
+
+#### 绘制画板的几种刷新方式
+```
+// 方式一自动刷新 (监听可变参数)
+MyPainter extends CustomPainter {
+    MyPainter(this.factor) : super(repaint: factor)
+    /// 动画控制 适用于渐变动画等
+    final Animation<double> factor;
+
+    /// 变量控制 用于手动触发，一次一帧
+    ValueNotifier<int> factor = ValueNotifier<int>(0);
+}
+
+// 方式二手动刷新
+class MyPainter extends ChangeNotifier implements CustomPainter
+// 刷新
+mouseEnter = newMouseEnter;
+notifyListeners();
 ```
