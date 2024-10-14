@@ -20,7 +20,7 @@ class TopMenuDivider extends StatelessWidget {
         ),
       ),
       child: SizedBox(
-        width: 2,
+        width: 1.5,
       ),
     );
   }

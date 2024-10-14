@@ -14,7 +14,7 @@ class TopMenuVerticalItem extends TopMenuItem {
     required super.menu,
   });
 
-  final String image;
+  final Widget image;
 
   @override
   Widget buildView() {
@@ -23,12 +23,7 @@ class TopMenuVerticalItem extends TopMenuItem {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            image,
-            width: 20,
-            height: 20,
-            fit: BoxFit.contain,
-          ),
+          image,
           5.verticalSpace,
           Text(
             title,

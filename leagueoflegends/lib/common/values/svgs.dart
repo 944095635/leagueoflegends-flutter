@@ -1,4 +1,4 @@
 /// svgs assets
 class AssetsSvgs {
-  static const playButtonSvg = 'assets/svgs/play_button.svg';
+  static const worlds_2023Svg = 'assets/svgs/worlds_2023.svg';
 }

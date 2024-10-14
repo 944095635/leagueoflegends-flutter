@@ -29,6 +29,14 @@ class StorePage extends GetView<StoreController> {
               ),
             ),
           ),
+          Center(
+            child: Image.asset(
+              AssetsImages.shurimaCrestIconPng,
+              width: 120,
+              height: 120,
+              fit: BoxFit.contain,
+            ),
+          ),
         ],
       ),
     );

@@ -119,7 +119,7 @@ class FramePage extends GetView<FrameController> {
         children: [
           10.horizontalSpace,
           const TopAvatar(
-            avatar: AssetsImages.code1Jpg,
+            avatar: AssetsImages.avatarJpg,
           ),
           10.horizontalSpace,
           const Column(
