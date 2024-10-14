@@ -91,7 +91,7 @@ class FramePage extends GetView<FrameController> {
             borderRadius: 20.borderRadius,
           ),
           child: const TopMoney(
-            image: AssetsImages.lolRpIcon,
+            image: AssetsImages.lolLogo_03Png,
             money: "100886",
           ),
         ),
@@ -99,7 +99,7 @@ class FramePage extends GetView<FrameController> {
         Padding(
           padding: 10.horizontal,
           child: const TopMoney(
-            image: AssetsImages.lolBlueEssence,
+            image: AssetsImages.lolBlueEssencePng,
             money: "19.9万",
           ),
         ),
@@ -117,7 +117,7 @@ class FramePage extends GetView<FrameController> {
         children: [
           10.horizontalSpace,
           const TopAvatar(
-            avatar: AssetsImages.cardKaisa,
+            avatar: AssetsImages.code1Jpg,
           ),
           10.horizontalSpace,
           const Column(

@@ -51,7 +51,7 @@ abstract class TopMenuItem extends StatelessWidget {
                   top: 2,
                   right: 0,
                   child: Image.asset(
-                    AssetsImages.menuSelected,
+                    AssetsImages.iconMenuSelectedPng,
                     height: 12,
                   ),
                 ),

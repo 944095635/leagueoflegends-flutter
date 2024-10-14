@@ -20,10 +20,10 @@ class FrameController extends GetxController {
   void onReady() {
     super.onReady();
     _initData();
-    precacheImage(const AssetImage(AssetsImages.code), Get.context!);
-    precacheImage(const AssetImage(AssetsImages.nami), Get.context!);
-    precacheImage(const AssetImage(AssetsImages.yasuo), Get.context!);
-    precacheImage(const AssetImage(AssetsImages.bg), Get.context!);
+    precacheImage(const AssetImage(AssetsImages.code1Jpg), Get.context!);
+    precacheImage(const AssetImage(AssetsImages.wallhaven_7pvod3Jpg), Get.context!);
+    precacheImage(const AssetImage(AssetsImages.yasuoJpg), Get.context!);
+    precacheImage(const AssetImage(AssetsImages.bgMapJpg), Get.context!);
   }
 
   // @override

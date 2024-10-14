@@ -36,7 +36,7 @@ class StorePage extends GetView<StoreController> {
 
   Widget _buildBackground() {
     return Image.asset(
-      AssetsImages.yasuo,
+      AssetsImages.yasuoJpg,
       cacheWidth: 3120,
       fit: BoxFit.cover,
     );

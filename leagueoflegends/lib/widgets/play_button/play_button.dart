@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart' hide Gradient;
 import 'package:flutter_styled/radius_extension.dart';
 import 'package:leagueoflegends/common/values/images.dart';
-import 'package:leagueoflegends/common/widgets/play_button/play_button_painter.dart';
+import 'package:leagueoflegends/widgets/play_button/play_button_painter.dart';
 
 /// 开始按钮
 class PlayButton extends StatefulWidget {
@@ -51,19 +51,19 @@ class _PlayButtonState extends State<PlayButton>
   }
 
   void init() async {
-    for (var i = 0; i < 13; i++) {
+    for (var i = 0; i < 18; i++) {
       double scale = Random().nextDouble() * 3 + 2;
       _lights.add(
         PlayButtonlight(
-          x: i * 10,
-          y: 2,
+          x: i * 8,
+          y: 6,
           scale: scale,
         ),
       );
       _lights.add(
         PlayButtonlight(
-          x: i * 12,
-          y: 24,
+          x: i * 7,
+          y: 23,
           scale: scale,
         ),
       );
@@ -152,7 +152,7 @@ class _PlayButtonState extends State<PlayButton>
           ),
         ),
         Image.asset(
-          AssetsImages.lolLogo,
+          AssetsImages.lolLogo_03Png,
           width: 40,
           height: 40,
         ),

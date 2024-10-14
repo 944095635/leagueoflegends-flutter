@@ -33,7 +33,7 @@ class CloudPage extends StatelessWidget {
 
   Widget _buildBackground() {
     return Image.asset(
-      AssetsImages.nami,
+      AssetsImages.wallhaven_7pvod3Jpg,
       cacheWidth: 3120,
       fit: BoxFit.cover,
     );

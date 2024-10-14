@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
 
   Widget _buildBackground() {
     return Image.asset(
-      AssetsImages.code,
+      AssetsImages.code1Jpg,
       cacheWidth: 3120,
       fit: BoxFit.cover,
     );

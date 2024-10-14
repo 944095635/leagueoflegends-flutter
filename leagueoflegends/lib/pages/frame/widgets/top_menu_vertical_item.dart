@@ -27,6 +27,7 @@ class TopMenuVerticalItem extends TopMenuItem {
             image,
             width: 20,
             height: 20,
+            fit: BoxFit.contain,
           ),
           5.verticalSpace,
           Text(

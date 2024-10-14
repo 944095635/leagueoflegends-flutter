@@ -3,7 +3,7 @@ import 'package:flutter_styled/size_extension.dart';
 import 'package:get/get.dart';
 import 'package:leagueoflegends/common/routers/names.dart';
 import 'package:leagueoflegends/common/values/images.dart';
-import 'package:leagueoflegends/common/widgets/play_button/play_button.dart';
+import 'package:leagueoflegends/widgets/play_button/play_button.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_divider.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_horizontal_item.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu_vertical_item.dart';
@@ -50,7 +50,7 @@ class _TopMenuState extends State<TopMenu> {
         TopMenuVerticalItem(
           title: "2024 全球总决赛",
           index: 3,
-          image: AssetsImages.lolLogo,
+          image: AssetsImages.lolLogo_03Png,
           selectd: selectIndex == 3,
           onTap: onTapMenu,
         ),
@@ -58,7 +58,7 @@ class _TopMenuState extends State<TopMenu> {
         TopMenuVerticalItem(
           title: "藏品",
           index: 4,
-          image: AssetsImages.lolLogo,
+          image: AssetsImages.lolLogo_03Png,
           selectd: selectIndex == 4,
           onTap: onTapMenu,
         ),
@@ -66,14 +66,14 @@ class _TopMenuState extends State<TopMenu> {
         TopMenuVerticalItem(
           index: 5,
           title: "战利品",
-          image: AssetsImages.lolLogo,
+          image: AssetsImages.esportsWatchSeriesIconPng,
           selectd: selectIndex == 5,
           onTap: onTapMenu,
         ),
         TopMenuVerticalItem(
           index: 6,
           title: "商城",
-          image: AssetsImages.lolLogo,
+          image: AssetsImages.esportsWatchSeriesIconPng,
           selectd: selectIndex == 6,
           onTap: onTapMenu,
         ),

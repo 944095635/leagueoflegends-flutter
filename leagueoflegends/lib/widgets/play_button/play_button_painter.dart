@@ -64,7 +64,7 @@ class PlayButtonPainter extends CustomPainter {
       var paint = Paint()
         ..style = PaintingStyle.fill
         ..color = const Color.fromARGB(200, 0, 195, 234)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 7);
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 7.5);
 
       for (var light in _lights) {
         if (light.x < 110) {
@@ -111,9 +111,8 @@ class PlayButtonlight {
   void doMove() {
     // 每帧往左侧移动像素
     if (move) {
-      x -= .4;
+      x -= .3;
     }
-
     // 如果X低于0 让它回到起点 150 ，但是 大于110 不会绘制
     if (x < 0) {
       x = 130;
