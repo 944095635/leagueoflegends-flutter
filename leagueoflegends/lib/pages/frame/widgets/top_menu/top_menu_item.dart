@@ -72,9 +72,11 @@ class _TopMenuItemState extends State<TopMenuItem> {
           ),
           child: Stack(
             children: [
-              CustomPaint(
-                painter: _painter,
-                child: widget.buildView(),
+              RepaintBoundary(
+                child: CustomPaint(
+                  painter: _painter,
+                  child: widget.buildView(),
+                ),
               ),
               if (widget.selectd)
                 Positioned(
@@ -100,7 +102,7 @@ class TopMenuItemPainter extends ChangeNotifier implements CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     //debugPrint("TopMenuItemPainter paint");
-    //debugPrint("鼠标：$mouseEnter");
+    debugPrint("重绘菜单");
 
     /// 没有进入不需要绘制
     if (!mouseEnter) {

@@ -127,10 +127,13 @@ class _PlayButtonState extends State<PlayButton>
                       child: SizedBox(
                         width: 120,
                         height: 30,
-                        child: CustomPaint(
-                          painter: PlayButtonPainter(_controller),
-                          child: Center(
-                            child: widget.text,
+                        child: RepaintBoundary(
+                          child: CustomPaint(
+                            isComplex: true,
+                            painter: PlayButtonPainter(_controller),
+                            child: Center(
+                              child: widget.text,
+                            ),
                           ),
                         ),
                       ),
@@ -182,6 +185,7 @@ class PlayButtonPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    debugPrint("重绘 Play");
     for (var light in _lights) {
       light.doMove();
     }

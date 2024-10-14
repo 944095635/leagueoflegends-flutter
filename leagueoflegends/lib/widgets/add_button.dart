@@ -28,8 +28,10 @@ class _AddButtonState extends State<AddButton> {
       },
       child: ConstrainedBox(
         constraints: const BoxConstraints(minHeight: 17, minWidth: 17),
-        child: CustomPaint(
-          painter: painter,
+        child: RepaintBoundary(
+          child: CustomPaint(
+            painter: painter,
+          ),
         ),
       ),
     );
@@ -46,6 +48,7 @@ class AddButtonPainter extends ChangeNotifier implements CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    debugPrint("重绘：AddButton");
     var paint = Paint()..color = const Color(0xFF252a29);
     canvas.drawOval(
       Rect.fromLTWH(
