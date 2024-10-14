@@ -34,9 +34,8 @@ abstract class TopMenuItem extends StatefulWidget {
 }
 
 class _TopMenuItemState extends State<TopMenuItem> {
-  double mouseX = 0;
-
-  bool enter = false;
+  /// 绘制
+  final TopMenuItemPainter _painter = TopMenuItemPainter();
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +48,13 @@ class _TopMenuItemState extends State<TopMenuItem> {
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         onEnter: (event) {
-          enter = true;
-          setState(() {});
+          _painter.updateEnter(true);
         },
         onExit: (event) {
-          enter = false;
-          setState(() {});
+          _painter.updateEnter(false);
         },
         onHover: (event) {
-          mouseX = event.localPosition.dx;
-          setState(() {});
+          _painter.updatePoint(event.localPosition.dx);
           //debugPrint("x:${event.localPosition.dx} y:${event.localPosition.dy}");
         },
         child: DecoratedBox(
@@ -76,12 +72,9 @@ class _TopMenuItemState extends State<TopMenuItem> {
           ),
           child: Stack(
             children: [
-              RepaintBoundary(
-                key: GlobalKey(),
-                child: CustomPaint(
-                  painter: TopMenuItemPainter(mouseX, mouseEnter: enter),
-                  child: widget.buildView(),
-                ),
+              CustomPaint(
+                painter: _painter,
+                child: widget.buildView(),
               ),
               if (widget.selectd)
                 Positioned(
@@ -101,23 +94,20 @@ class _TopMenuItemState extends State<TopMenuItem> {
   }
 }
 
-class TopMenuItemPainter extends CustomPainter {
-  TopMenuItemPainter(
-    this.mouseX, {
-    required this.mouseEnter,
-  });
-
-  bool mouseEnter;
-
-  // 鼠标的坐标点
-  double mouseX;
+class TopMenuItemPainter extends ChangeNotifier implements CustomPainter {
+  TopMenuItemPainter();
 
   @override
   void paint(Canvas canvas, Size size) {
+    //debugPrint("TopMenuItemPainter paint");
+    //debugPrint("鼠标：$mouseEnter");
+
     /// 没有进入不需要绘制
     if (!mouseEnter) {
+      //debugPrint("没有进入不需要绘制 paint");
       return;
     }
+
     var gradient = Gradient.radial(
       Offset(mouseX, 102),
       size.width,
@@ -185,5 +175,33 @@ class TopMenuItemPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant TopMenuItemPainter oldDelegate) {
     return mouseEnter != oldDelegate.mouseEnter || mouseX != oldDelegate.mouseX;
+  }
+
+  @override
+  bool? hitTest(Offset position) => true;
+
+  @override
+  SemanticsBuilderCallback? get semanticsBuilder => null;
+
+  @override
+  bool shouldRebuildSemantics(CustomPainter oldDelegate) => false;
+
+  /// 鼠标进入
+  bool mouseEnter = false;
+
+  // 鼠标的坐标点
+  double mouseX = 0;
+
+  /// 更新
+  void updateEnter(bool newMouseEnter) {
+    mouseEnter = newMouseEnter;
+    //debugPrint("鼠标进入退出：$mouseEnter");
+    notifyListeners();
+  }
+
+  /// 更新
+  void updatePoint(double newMouseX) {
+    mouseX = newMouseX;
+    notifyListeners();
   }
 }

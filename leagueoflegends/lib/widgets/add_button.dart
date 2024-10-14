@@ -99,9 +99,7 @@ class AddButtonPainter extends ChangeNotifier implements CustomPainter {
   }
 
   @override
-  bool? hitTest(Offset position) {
-    return true;
-  }
+  bool? hitTest(Offset position) => true;
 
   @override
   SemanticsBuilderCallback? get semanticsBuilder => null;
