@@ -48,6 +48,14 @@ drawplusPath = plusPath.transform(matrix.storage);
 canvas.drawPath(drawplusPath, plusPaint);
 ```
 
+#### 绘制画板要用RepaintBoundary包裹，不然刷新时机乱套了
+```
+   RepaintBoundary(
+      child: CustomPaint(
+          painter: painter,
+      ),
+```
+
 #### 绘制画板的几种刷新方式
 ```
 // 方式一自动刷新 (监听可变参数)
