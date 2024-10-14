@@ -9,6 +9,7 @@ import 'package:leagueoflegends/pages/frame/widgets/top_avatar.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_type.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_money.dart';
+import 'package:leagueoflegends/widgets/add_button.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'index.dart';
@@ -83,8 +84,8 @@ class FramePage extends GetView<FrameController> {
       children: [
         Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: 3,
+            horizontal: 6,
+            vertical: 5,
           ),
           decoration: BoxDecoration(
             border: Border.all(
@@ -92,14 +93,20 @@ class FramePage extends GetView<FrameController> {
             ),
             borderRadius: 20.borderRadius,
           ),
-          child: const TopMoney(
-            image: AssetsImages.lolLogo_03Png,
-            money: "100886",
+          child: Row(
+            children: [
+              const TopMoney(
+                image: AssetsImages.lolRpIconPng,
+                money: "100886",
+              ),
+              10.horizontalSpace,
+              const AddButton(),
+            ],
           ),
         ),
         5.verticalSpace,
         Padding(
-          padding: 10.horizontal,
+          padding: 6.horizontal,
           child: const TopMoney(
             image: AssetsImages.lolBlueEssencePng,
             money: "19.9万",

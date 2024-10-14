@@ -16,7 +16,7 @@ class TopAvatar extends StatelessWidget {
     return Center(
       child: SizedBox(
         width: 60,
-        height: 62,
+        height: 60,
         child: Stack(
           children: [
             Container(
@@ -24,22 +24,28 @@ class TopAvatar extends StatelessWidget {
               height: 60,
               decoration: BoxDecoration(
                 border: Border.all(
-                  width: 2.5,
-                  color: SystemColors.themeColor,
+                  width: 2,
+                  color: const Color.fromARGB(255, 163, 108, 12),
                 ),
                 borderRadius: 100.borderRadius,
-                
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 163, 108, 12),
+                    spreadRadius: .5,
+                    blurRadius: 2,
+                  )
+                ],
               ),
-              padding: const EdgeInsets.all(1.5),
+              padding: const EdgeInsets.all(2),
               child: Stack(
                 fit: StackFit.expand,
                 children: [
                   Container(
-                    margin: const EdgeInsets.all(1.5),
+                    margin: const EdgeInsets.all(2.6),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        width: 2.5,
-                        color: SystemColors.themeColor,
+                        width: 1,
+                        color: const Color.fromARGB(255, 242, 156, 6),
                       ),
                       borderRadius: 100.borderRadius,
                       image: DecorationImage(
@@ -52,9 +58,9 @@ class TopAvatar extends StatelessWidget {
                   const RotatedBox(
                     quarterTurns: 2,
                     child: CircularProgressIndicator(
-                      value: .45,
-                      color: Color(0xFF0596aa),
-                      backgroundColor: Color(0xFF082730),
+                      value: .65,
+                      color: Color.fromARGB(255, 16, 165, 184),
+                      backgroundColor: Color(0xFF092f38),
                     ),
                   ),
                 ],

@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:leagueoflegends/common/index.dart';
 import 'package:leagueoflegends/common/style/colors.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_type.dart';
-import 'package:leagueoflegends/widgets/play_button/play_button.dart';
+import 'package:leagueoflegends/widgets/play_button.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_divider.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_horizontal_item.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_vertical_item.dart';
@@ -85,20 +85,42 @@ class _TopMenuState extends State<TopMenu> {
           onTap: onChangeMenu,
         ),
         const TopMenuDivider(),
-        Badge(
-          label: const SizedBox(),
-          child: TopMenuVerticalItem(
-            title: "藏品",
-            menu: TopMenuType.collection,
-            image: Image.asset(
-              AssetsImages.mtTargonCrestIconPng,
-              width: 24,
-              height: 24,
-              fit: BoxFit.contain,
+        Stack(
+          children: [
+            TopMenuVerticalItem(
+              title: "藏品",
+              menu: TopMenuType.collection,
+              image: Image.asset(
+                AssetsImages.mtTargonCrestIconPng,
+                width: 24,
+                height: 24,
+                fit: BoxFit.contain,
+              ),
+              selectd: selectMenu == TopMenuType.collection,
+              onTap: onChangeMenu,
             ),
-            selectd: selectMenu == TopMenuType.collection,
-            onTap: onChangeMenu,
-          ),
+            const Positioned(
+              right: 16,
+              top: 16,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Color(0xFFEFD396),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.white,
+                      blurRadius: 6,
+                      spreadRadius: 1,
+                    )
+                  ],
+                ),
+                child: SizedBox(
+                  width: 8,
+                  height: 8,
+                ),
+              ),
+            )
+          ],
         ),
         const TopMenuDivider(),
         TopMenuVerticalItem(
