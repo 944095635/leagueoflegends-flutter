@@ -59,6 +59,10 @@ class MyApp extends StatelessWidget {
           color: Color(0xAA3d4143),
           thickness: 1,
         ),
+        badgeTheme: const BadgeThemeData(
+          offset: Offset(-4, 8),
+          backgroundColor: Color(0xFFca9f3f),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const FramePage(),

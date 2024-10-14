@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_styled/size_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:leagueoflegends/common/index.dart';
 import 'package:leagueoflegends/common/style/colors.dart';
-import 'package:leagueoflegends/common/values/images.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_type.dart';
 import 'package:leagueoflegends/widgets/play_button/play_button.dart';
 import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_divider.dart';
@@ -75,8 +75,8 @@ class _TopMenuState extends State<TopMenu> {
           menu: TopMenuType.world,
           image: SvgPicture.asset(
             AssetsSvgs.worlds_2023Svg,
-            width: 20,
-            height: 20,
+            width: 24,
+            height: 24,
             color: selectMenu == TopMenuType.world
                 ? SystemColors.foregroundLightColor
                 : SystemColors.foregroundColor,
@@ -85,17 +85,20 @@ class _TopMenuState extends State<TopMenu> {
           onTap: onChangeMenu,
         ),
         const TopMenuDivider(),
-        TopMenuVerticalItem(
-          title: "藏品",
-          menu: TopMenuType.collection,
-          image: Image.asset(
-            AssetsImages.mtTargonCrestIconPng,
-            width: 20,
-            height: 20,
-            fit: BoxFit.contain,
+        Badge(
+          label: const SizedBox(),
+          child: TopMenuVerticalItem(
+            title: "藏品",
+            menu: TopMenuType.collection,
+            image: Image.asset(
+              AssetsImages.mtTargonCrestIconPng,
+              width: 24,
+              height: 24,
+              fit: BoxFit.contain,
+            ),
+            selectd: selectMenu == TopMenuType.collection,
+            onTap: onChangeMenu,
           ),
-          selectd: selectMenu == TopMenuType.collection,
-          onTap: onChangeMenu,
         ),
         const TopMenuDivider(),
         TopMenuVerticalItem(
@@ -103,8 +106,8 @@ class _TopMenuState extends State<TopMenu> {
           menu: TopMenuType.spoils,
           image: Image.asset(
             AssetsImages.bilgewaterCrestIconPng,
-            width: 20,
-            height: 20,
+            width: 24,
+            height: 24,
             fit: BoxFit.contain,
           ),
           selectd: selectMenu == TopMenuType.spoils,
@@ -115,8 +118,8 @@ class _TopMenuState extends State<TopMenu> {
           menu: TopMenuType.store,
           image: Image.asset(
             AssetsImages.shurimaCrestIconPng,
-            width: 20,
-            height: 20,
+            width: 24,
+            height: 24,
             fit: BoxFit.contain,
           ),
           selectd: selectMenu == TopMenuType.store,

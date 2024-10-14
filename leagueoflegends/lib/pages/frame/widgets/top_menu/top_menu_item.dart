@@ -85,7 +85,7 @@ class _TopMenuItemState extends State<TopMenuItem> {
               if (widget.selectd)
                 Positioned(
                   left: 0,
-                  top: 2.5,
+                  top: 1,
                   right: 0,
                   child: Image.asset(
                     AssetsImages.iconMenuSelectedPng,

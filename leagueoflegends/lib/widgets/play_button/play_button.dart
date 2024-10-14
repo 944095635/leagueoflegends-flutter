@@ -55,18 +55,18 @@ class _PlayButtonState extends State<PlayButton>
   }
 
   void init() async {
-    for (var i = 0; i < 18; i++) {
+    for (var i = 0; i < 20; i++) {
       double scale = Random().nextDouble() * 3 + 2;
       _lights.add(
         PlayButtonlight(
-          x: i * 8,
+          x: i * 13,
           y: 6,
           scale: scale,
         ),
       );
       _lights.add(
         PlayButtonlight(
-          x: i * 7,
+          x: i * 12,
           y: 23,
           scale: scale,
         ),
