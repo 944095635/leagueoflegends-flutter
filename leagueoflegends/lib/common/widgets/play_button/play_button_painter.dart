@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 import 'package:path_drawing/path_drawing.dart';
 import 'package:flutter/material.dart' hide Gradient;
@@ -46,6 +45,7 @@ class PlayButtonPainter extends CustomPainter {
   /// 动画进度
   final double progress;
 
+  /// 光斑
   final List<PlayButtonlight> _lights;
 
   @override
@@ -63,19 +63,19 @@ class PlayButtonPainter extends CustomPainter {
     if (progress < 1) {
       var paint = Paint()
         ..style = PaintingStyle.fill
-        ..color = const Color.fromARGB(255, 0, 195, 234)
+        ..color = const Color.fromARGB(200, 0, 195, 234)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 7);
 
       for (var light in _lights) {
         if (light.x < 110) {
-          canvas.drawRect(
-              Rect.fromLTWH(
-                light.x,
-                light.y,
-                light.scale,
-                light.scale,
-              ),
-              paint);
+          canvas.drawCircle(
+            Offset(
+              light.x,
+              light.y,
+            ),
+            light.scale,
+            paint,
+          );
         }
       }
     }
@@ -89,39 +89,34 @@ class PlayButtonPainter extends CustomPainter {
 
 /// 光点
 class PlayButtonlight {
-  // 横向坐标 - 初始位置 0 - 120
-  // Random().nextDouble() * 120
+  /// 横向坐标
   double x;
-  // 纵向坐标 - 初始位置 0 : 30
+
+  /// 纵向坐标
   late double y;
-  // 缩放 比例 从 4 - 8
-  late double scale = Random().nextDouble() * 3 + 3;
+
+  /// 缩放
+  late double scale;
 
   /// 某些光斑不会移动
   late bool move;
 
   PlayButtonlight({
     required this.x,
-    bool bottom = false,
+    required this.y,
     this.move = true,
-  }) {
-    if (bottom) {
-      y = 24 - scale;
-    } else {
-      y = 4;
-    }
-  }
+    required this.scale,
+  });
 
-  // 控制光斑 往右侧移动
   void doMove() {
-    // 每帧往左侧移动3个像素
+    // 每帧往左侧移动像素
     if (move) {
-      x -= .6;
+      x -= .4;
     }
 
     // 如果X低于0 让它回到起点 150 ，但是 大于110 不会绘制
     if (x < 0) {
-      x = 140;
+      x = 130;
     }
   }
 }

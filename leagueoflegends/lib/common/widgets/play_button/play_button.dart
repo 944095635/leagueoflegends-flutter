@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart' hide Gradient;
 import 'package:flutter_styled/radius_extension.dart';
 import 'package:leagueoflegends/common/values/images.dart';
@@ -32,33 +34,12 @@ class _PlayButtonState extends State<PlayButton>
   void initState() {
     super.initState();
 
-    // 构建光斑动画元素 - 上方
-
-    _lights.add(PlayButtonlight(x: 10));
-    _lights.add(PlayButtonlight(x: 17));
-    _lights.add(PlayButtonlight(x: 28));
-    _lights.add(PlayButtonlight(x: 43));
-    _lights.add(PlayButtonlight(x: 69));
-    _lights.add(PlayButtonlight(x: 80));
-    _lights.add(PlayButtonlight(x: 108));
-
-    _lights.add(PlayButtonlight(x: 0, bottom: true));
-    _lights.add(PlayButtonlight(x: 15, bottom: true));
-    _lights.add(PlayButtonlight(x: 20, bottom: true));
-    _lights.add(PlayButtonlight(x: 35, bottom: true));
-    _lights.add(PlayButtonlight(x: 40, bottom: true));
-    _lights.add(PlayButtonlight(x: 78, bottom: true));
-    _lights.add(PlayButtonlight(x: 80, bottom: true));
-    _lights.add(PlayButtonlight(x: 98, bottom: true));
-    _lights.add(PlayButtonlight(x: 108, bottom: true));
-
-    _lights.add(PlayButtonlight(x: 0, move: false));
-    _lights.add(PlayButtonlight(x: 0, bottom: true, move: false));
+    init();
 
     _controller = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 1),
       vsync: this,
-    ); // 动画无限循环，并且反向播放
+    );
 
     _animation = Tween<double>(
       begin: 1,
@@ -67,6 +48,27 @@ class _PlayButtonState extends State<PlayButton>
       parent: _controller,
       curve: Curves.slowMiddle,
     ));
+  }
+
+  void init() async {
+    for (var i = 0; i < 13; i++) {
+      double scale = Random().nextDouble() * 3 + 2;
+      _lights.add(
+        PlayButtonlight(
+          x: i * 10,
+          y: 2,
+          scale: scale,
+        ),
+      );
+      _lights.add(
+        PlayButtonlight(
+          x: i * 12,
+          y: 24,
+          scale: scale,
+        ),
+      );
+      await Future.delayed(const Duration(milliseconds: 10));
+    }
   }
 
   @override
