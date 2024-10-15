@@ -83,7 +83,7 @@ class TopMenuShadowPainter extends ChangeNotifier implements CustomPainter {
 
     var paint = Paint()
       ..shader = gradient
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 20)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 30)
       ..strokeWidth = 1;
 
     // 设置裁剪区域，超出该区域不会绘制 Offset.zero  & size
@@ -143,7 +143,6 @@ class TopMenuShadowPainter extends ChangeNotifier implements CustomPainter {
       Offset(mouseX - 50, size.height),
       Offset(mouseX + 50, size.height),
       Paint()
-        ..color = const Color(0xFFe6dbc3)
         ..strokeCap = StrokeCap.round
         ..shader = lineColor
         ..strokeWidth = 1.5,
