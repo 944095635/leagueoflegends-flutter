@@ -10,36 +10,6 @@ import 'package:path_drawing/path_drawing.dart';
 final Path playPath = parseSvgPathData(
     'M107.405,-0.00005100000000002325L0.499885955,0.024332999999999994L-0.458643,0.02455099999999999L0.40061009999999997,1.255481Q4.65908,7.66886,4.65908,15.706Q4.65908,23.7432,0.4006321,30.1566L-0.18832300000000002,31.0002L107.413,30.9809L121.169,15.495L107.405,-0.00005100000000002325ZM1.68959,29.9998L106.964,29.9809L119.831,15.495L106.956,1.000051L1.44415,1.024117Q5.65907,7.56777,5.65908,15.706Q5.65908,23.6038,1.68959,29.9998Z');
 
-final Gradient playColor = Gradient.linear(
-  Offset.zero,
-  const Offset(0, 30),
-  [
-    const Color(0X883FE7FF),
-    const Color(0X88006D7D),
-    const Color(0X880493A7),
-  ],
-  [
-    0,
-    .5,
-    1,
-  ],
-);
-
-final playHoverColor = Gradient.linear(
-  Offset.zero,
-  const Offset(0, 30),
-  [
-    const Color(0xFFAFF5FF),
-    const Color(0xFF46E6FF),
-    const Color(0xFF00ADD4),
-  ],
-  [
-    0,
-    .5,
-    1,
-  ],
-);
-
 /// 开始按钮
 class PlayButton extends StatefulWidget {
   const PlayButton({
@@ -260,16 +230,27 @@ class PlayButtonPainter extends ChangeNotifier implements CustomPainter {
 
     /// 判断动画是否启动
     //debugPrint("判断动画是否启动");
+
+    //hover Color
+    // const Color(0xFFAFF5FF),
+    // const Color(0xFF46E6FF),
+    // const Color(0xFF00ADD4),
+
+    //Color
+    // const Color(0X883FE7FF),
+    // const Color(0X88006D7D),
+    // const Color(0XFF0493A7),
+
     Paint arrowPaint = Paint()
-      ..shader = mouseEnter ? playHoverColor : playColor
       ..style = PaintingStyle.stroke
+      ..color = mouseEnter ? const Color(0xFFAFF5FF) : const Color(0X883FE7FF)
       ..strokeWidth = 1.5;
     canvas.drawPath(playPath, arrowPaint);
 
     if (mouseEnter) {
       var paint = Paint()
         ..color = const Color.fromARGB(255, 0, 195, 220)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5);
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5.5);
 
       for (var element in _lights) {
         canvas.drawCircle(
