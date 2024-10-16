@@ -48,7 +48,7 @@ class AddButtonPainter extends ChangeNotifier implements CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    debugPrint("重绘：AddButton");
+    //debugPrint("重绘：AddButton");
     var paint = Paint()..color = const Color(0xFF252a29);
     canvas.drawOval(
       Rect.fromLTWH(

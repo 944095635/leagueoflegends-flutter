@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart' hide Gradient;
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_styled/radius_extension.dart';
 import 'package:leagueoflegends/common/values/images.dart';
 import 'package:path_drawing/path_drawing.dart';
@@ -56,29 +57,7 @@ class PlayButton extends StatefulWidget {
   State<PlayButton> createState() => _PlayButtonState();
 }
 
-class _PlayButtonState extends State<PlayButton>
-    with SingleTickerProviderStateMixin {
-  // 动画控制器
-  late AnimationController _controller;
-
-  // 是否悬浮鼠标
-  bool hover = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(seconds: 100),
-      vsync: this,
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+class _PlayButtonState extends State<PlayButton> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -111,18 +90,10 @@ class _PlayButtonState extends State<PlayButton>
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
                       onEnter: (event) {
-                        hover = true;
-                        if (!_controller.isAnimating) {
-                          //debugPrint("onEnter");
-                          _controller.repeat();
-                        }
+                        mouserEnter();
                       },
-                      onExit: (event) async {
-                        hover = false;
-                        await Future.delayed(Durations.long1);
-                        if (!hover) {
-                          _controller.reset();
-                        }
+                      onExit: (event) {
+                        mouserOut();
                       },
                       child: SizedBox(
                         width: 120,
@@ -130,7 +101,7 @@ class _PlayButtonState extends State<PlayButton>
                         child: RepaintBoundary(
                           child: CustomPaint(
                             isComplex: true,
-                            painter: PlayButtonPainter(_controller),
+                            painter: _painter,
                             child: Center(
                               child: widget.text,
                             ),
@@ -152,112 +123,211 @@ class _PlayButtonState extends State<PlayButton>
       ],
     );
   }
-}
 
-class PlayButtonPainter extends CustomPainter {
-  PlayButtonPainter(this.factor) : super(repaint: factor) {
-    //debugPrint("PlayButtonPainter 初始化");
-    for (var i = 0; i < 20; i++) {
-      double scale = Random().nextDouble() * 3 + 2;
-      _lights.add(
-        PlayButtonlight(
-          x: i * 10,
-          y: 6,
-          scale: scale,
-        ),
-      );
-      _lights.add(
-        PlayButtonlight(
-          x: i * 9,
-          y: 23,
-          scale: scale,
-        ),
-      );
-      Future.delayed(const Duration(milliseconds: 10));
+  // 画刷
+  late PlayButtonPainter _painter;
+
+  // Tiker 触发器
+  late Ticker _ticker;
+
+  // 是否悬浮鼠标
+  bool mouseEnter = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _painter = PlayButtonPainter();
+    _ticker = Ticker(_onTick);
+  }
+
+  /// 间隔
+  int elapsed = 0;
+
+  void _onTick(Duration newElapsed) {
+    //debugPrint("OnTick:$elapsed");
+    elapsed++;
+    if (elapsed > 14) {
+      elapsed = 0;
+      _painter.update();
     }
   }
 
-  /// 动画控制
-  final Animation<double> factor;
+  /// 鼠标进入
+  void mouserEnter() {
+    mouseEnter = true;
+    _painter.updateState(true);
+    if (!_ticker.isTicking) {
+      //debugPrint("onEnter");
+      _ticker.start();
+    }
+  }
+
+  /// 鼠标离开
+  void mouserOut() async {
+    mouseEnter = false;
+    await Future.delayed(Durations.long1);
+    if (!mouseEnter) {
+      _ticker.stop();
+      _painter.updateState(false);
+    }
+  }
+
+  @override
+  void dispose() {
+    _ticker.dispose();
+    _painter.dispose();
+    super.dispose();
+  }
+}
+
+class PlayButtonPainter extends ChangeNotifier implements CustomPainter {
+  PlayButtonPainter() {
+    //debugPrint("PlayButtonPainter 初始化");
+    PathMetrics pathMetrics = playPath.computeMetrics();
+    //获取第一小节信息
+    PathMetric pathMetric = pathMetrics.first;
+
+    // 获取顶部路径
+    PathMetric topPathMetric = pathMetric
+        .extractPath(
+          0,
+          pathMetric.length * .45,
+          startWithMoveTo: true,
+        )
+        .computeMetrics()
+        .first;
+
+    // 截取顶部的路径
+    firstPathPoints = splitPath(topPathMetric);
+
+    // 获取底部部路径
+    PathMetric bottomPathMetric = pathMetric
+        .extractPath(
+          pathMetric.length * .45,
+          pathMetric.length,
+          startWithMoveTo: false,
+        )
+        .computeMetrics()
+        .first;
+    // 截取底部路径
+    lastPathPoints = splitPath(bottomPathMetric).reversed.toList();
+
+    // 产生光点
+    for (var i = 0; i < pointCount; i++) {
+      double radius = Random().nextDouble() * 2 + 1;
+      _lights.add(PlayButtonLight(offset: i, radius: radius));
+    }
+  }
+
+  /// 拆分路径
+  List<Offset> splitPath(PathMetric pathMetric) {
+    List<Offset> points = [];
+    for (var i = 0; i < pointCount; i++) {
+      Tangent? tangent =
+          pathMetric.getTangentForOffset(pathMetric.length * i / pointCount);
+      if (tangent != null) {
+        points.add(tangent.position);
+      }
+    }
+    return points;
+  }
+
+  /// 移动光点
+  void moveLight() {
+    for (var light in _lights) {
+      light.offset++;
+      if (light.offset >= pointCount) {
+        light.offset = 0;
+      }
+    }
+  }
+
+  // 将路径拆分成 多个点位
+  final int pointCount = 30;
+
+  /// 第一段路径上面的点集合
+  late List<Offset> firstPathPoints;
+
+  /// 第二段路径上面的点集合
+  late List<Offset> lastPathPoints;
 
   /// 光斑
-  final List<PlayButtonlight> _lights = List.empty(growable: true);
+  final List<PlayButtonLight> _lights = List.empty(growable: true);
 
   @override
   void paint(Canvas canvas, Size size) {
-    debugPrint("重绘 Play");
-    for (var light in _lights) {
-      light.doMove();
-    }
-
-    // 绘制顶部的箭头形状
-    Path arrowPath = Path();
-    arrowPath.addPath(playPath, Offset(size.width - 120, -0.5));
+    //debugPrint("重绘 Play");
 
     /// 判断动画是否启动
     //debugPrint("判断动画是否启动");
     Paint arrowPaint = Paint()
-      ..shader = factor.isAnimating ? playHoverColor : playColor
+      ..shader = mouseEnter ? playHoverColor : playColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
-    canvas.drawPath(arrowPath, arrowPaint);
+    canvas.drawPath(playPath, arrowPaint);
 
-    if (factor.isAnimating) {
+    if (mouseEnter) {
       var paint = Paint()
-        ..style = PaintingStyle.fill
-        ..color = const Color.fromARGB(200, 0, 195, 234)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 7.5);
+        ..color = const Color.fromARGB(255, 0, 195, 220)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3.5);
 
-      for (var light in _lights) {
-        if (light.x < 110) {
-          canvas.drawCircle(
-            Offset(
-              light.x,
-              light.y,
-            ),
-            light.scale,
-            paint,
-          );
-        }
+      for (var element in _lights) {
+        canvas.drawCircle(
+          firstPathPoints[element.offset],
+          element.radius,
+          paint,
+        );
+
+        canvas.drawCircle(
+          lastPathPoints[element.offset],
+          element.radius,
+          paint,
+        );
       }
     }
   }
 
   @override
+  bool? hitTest(Offset position) => true;
+
+  @override
+  SemanticsBuilderCallback? get semanticsBuilder => null;
+
+  @override
+  bool shouldRebuildSemantics(CustomPainter oldDelegate) => false;
+
+  @override
   bool shouldRepaint(covariant PlayButtonPainter oldDelegate) {
-    return factor != oldDelegate.factor;
+    return false;
+  }
+
+  // 鼠标状态
+  bool mouseEnter = false;
+
+  /// 更新 状态
+  void updateState(bool enter) {
+    mouseEnter = enter;
+    notifyListeners();
+  }
+
+  /// 更新
+  void update() {
+    moveLight();
+    notifyListeners();
   }
 }
 
 /// 光点
-class PlayButtonlight {
-  /// 横向坐标
-  double x;
+class PlayButtonLight {
+  /// 当前光点的偏移量
+  /// 以确定它在动画时间轴中所处的位置
+  late int offset;
 
-  /// 纵向坐标
-  late double y;
+  /// 范围可以控制在 1~3
+  late double radius;
 
-  /// 缩放
-  late double scale;
-
-  /// 某些光斑不会移动
-  late bool move;
-
-  PlayButtonlight({
-    required this.x,
-    required this.y,
-    this.move = true,
-    required this.scale,
+  PlayButtonLight({
+    required this.offset,
+    required this.radius,
   });
-
-  void doMove() {
-    // 每帧往左侧移动像素
-    if (move) {
-      x -= .3;
-    }
-    // 如果X低于0 让它回到起点 150 ，但是 大于110 不会绘制
-    if (x < 0) {
-      x = 130;
-    }
-  }
 }

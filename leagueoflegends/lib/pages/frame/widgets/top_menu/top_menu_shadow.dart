@@ -56,7 +56,7 @@ class TopMenuShadowPainter extends ChangeNotifier implements CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     //debugPrint("TopMenuShadowPainter paint");
-    debugPrint("重绘菜单");
+    //debugPrint("重绘菜单");
 
     /// 没有进入不需要绘制
     if (!mouseEnter) {
