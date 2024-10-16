@@ -214,7 +214,7 @@ class PlayButtonPainter extends ChangeNotifier implements CustomPainter {
 
     // 产生光点
     for (var i = 0; i < pointCount; i++) {
-      double radius = Random().nextDouble() * 2 + 1;
+      double radius = Random().nextDouble() * 2 + 2;
       _lights.add(PlayButtonLight(offset: i, radius: radius));
     }
   }
@@ -269,7 +269,7 @@ class PlayButtonPainter extends ChangeNotifier implements CustomPainter {
     if (mouseEnter) {
       var paint = Paint()
         ..color = const Color.fromARGB(255, 0, 195, 220)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3.5);
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5);
 
       for (var element in _lights) {
         canvas.drawCircle(
