@@ -243,7 +243,7 @@ class PlayButtonPainter extends ChangeNotifier implements CustomPainter {
 
     Paint arrowPaint = Paint()
       ..style = PaintingStyle.stroke
-      ..color = mouseEnter ? const Color(0xFFAFF5FF) : const Color(0X883FE7FF)
+      ..color = mouseEnter ? const Color(0xFFAFF5FF) : const Color(0xFF33B6CA)
       ..strokeWidth = 1.5;
     canvas.drawPath(playPath, arrowPaint);
 
