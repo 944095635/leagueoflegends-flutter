@@ -61,13 +61,23 @@ class FramePage extends GetView<FrameController> {
           fit: StackFit.expand,
           children: [
             const DragToMoveArea(child: SizedBox()),
-            Row(
+            Flex(
+              direction: Axis.horizontal,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TopMenu(onChangeMenu: onChangeMenu),
-                20.horizontalSpace,
-                _buildMoney(),
-                const Spacer(),
-                _buildUserInfo(),
+                Expanded(child: TopMenu(onChangeMenu: onChangeMenu)),
+                SizedBox(
+                  width: 450,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildMoney(),
+                      _buildUserInfo(),
+                      _windowButtons(),
+                    ],
+                  ),
+                )
               ],
             )
           ],
@@ -119,7 +129,6 @@ class FramePage extends GetView<FrameController> {
   /// 用户信息
   Widget _buildUserInfo() {
     return SizedBox(
-      width: 220,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -150,6 +159,42 @@ class FramePage extends GetView<FrameController> {
               ),
             ],
           )
+        ],
+      ),
+    );
+  }
+
+  /// window button
+  Widget _windowButtons() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 0),
+      child: Row(
+        children: [
+          /// 最小化
+          IconButton(
+            onPressed: () => windowManager.minimize(),
+            icon: const Icon(Icons.remove),
+          ),
+
+          /// 最大化/还原
+          IconButton(
+              onPressed: () async {
+                if (await windowManager.isMaximized()) {
+                  windowManager.unmaximize();
+                } else {
+                  windowManager.maximize();
+                }
+              },
+              icon: const Icon(Icons.crop_square)),
+
+          /// 关闭窗口/退出程序
+          IconButton(
+            onPressed: () => windowManager.close(),
+            icon: const Icon(
+              Icons.close,
+              color: Colors.redAccent,
+            ),
+          ),
         ],
       ),
     );
