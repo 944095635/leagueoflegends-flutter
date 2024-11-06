@@ -21,7 +21,7 @@ void main() async {
       size: Size(1280, 720),
       center: true,
       //maximumSize: Size(1280, 720),
-      minimumSize: Size(1280, 720),
+      minimumSize: Size(1280, 520),
       backgroundColor: Colors.black,
       titleBarStyle: TitleBarStyle.hidden,
     );
@@ -58,6 +58,11 @@ class MyApp extends StatelessWidget {
         dividerTheme: const DividerThemeData(
           color: Color(0xAA3d4143),
           thickness: 1,
+        ),
+        iconButtonTheme: const IconButtonThemeData(
+          style: ButtonStyle(
+            visualDensity: VisualDensity.compact,
+          ),
         ),
       ),
       debugShowCheckedModeBanner: false,

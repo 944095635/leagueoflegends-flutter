@@ -61,22 +61,28 @@ class FramePage extends GetView<FrameController> {
           fit: StackFit.expand,
           children: [
             const DragToMoveArea(child: SizedBox()),
-            Flex(
-              direction: Axis.horizontal,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Row(
               children: [
-                Expanded(child: TopMenu(onChangeMenu: onChangeMenu)),
-                SizedBox(
-                  width: 450,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildMoney(),
-                      _buildUserInfo(),
-                      _windowButtons(),
-                    ],
-                  ),
+                Expanded(
+                  child: TopMenu(onChangeMenu: onChangeMenu),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildMoney(),
+                    20.horizontalSpace,
+                    _buildUserInfo(),
+                    10.horizontalSpace,
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        right: 5,
+                        top: 5,
+                      ),
+                      child: _windowButtons(),
+                    )
+                  ],
                 )
               ],
             )
@@ -128,75 +134,77 @@ class FramePage extends GetView<FrameController> {
 
   /// 用户信息
   Widget _buildUserInfo() {
-    return SizedBox(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          10.horizontalSpace,
-          const TopAvatar(
-            avatar: AssetsImages.avatarJpg,
-          ),
-          10.horizontalSpace,
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Dream.Machine",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Color.fromARGB(255, 239, 227, 198),
-                ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        10.horizontalSpace,
+        const TopAvatar(
+          avatar: AssetsImages.avatarJpg,
+        ),
+        10.horizontalSpace,
+        const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Dream.Machine",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Color.fromARGB(255, 239, 227, 198),
               ),
-              Text(
-                "在线",
-                style: TextStyle(
-                  fontSize: 12.5,
-                  color: Color(0xFF00a72e),
-                ),
+            ),
+            Text(
+              "在线",
+              style: TextStyle(
+                fontSize: 12.5,
+                color: Color(0xFF00a72e),
               ),
-            ],
-          )
-        ],
-      ),
+            ),
+          ],
+        )
+      ],
     );
   }
 
-  /// window button
+  /// 系统按钮 window button
   Widget _windowButtons() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: Row(
-        children: [
-          /// 最小化
-          IconButton(
-            onPressed: () => windowManager.minimize(),
-            icon: const Icon(Icons.remove),
+    return Row(
+      children: [
+        /// 最小化
+        IconButton(
+          onPressed: () => windowManager.minimize(),
+          icon: const Icon(
+            Icons.remove,
+            size: 16,
           ),
+        ),
 
-          /// 最大化/还原
-          IconButton(
-              onPressed: () async {
-                if (await windowManager.isMaximized()) {
-                  windowManager.unmaximize();
-                } else {
-                  windowManager.maximize();
-                }
-              },
-              icon: const Icon(Icons.crop_square)),
-
-          /// 关闭窗口/退出程序
-          IconButton(
-            onPressed: () => windowManager.close(),
-            icon: const Icon(
-              Icons.close,
-              color: Colors.redAccent,
-            ),
+        /// 最大化/还原
+        IconButton(
+          onPressed: () async {
+            if (await windowManager.isMaximized()) {
+              windowManager.unmaximize();
+            } else {
+              windowManager.maximize();
+            }
+          },
+          icon: const Icon(
+            Icons.crop_square,
+            size: 16,
           ),
-        ],
-      ),
+        ),
+
+        /// 关闭窗口/退出程序
+        IconButton(
+          onPressed: () => windowManager.close(),
+          icon: const Icon(
+            Icons.close,
+            size: 16,
+          ),
+        ),
+      ],
     );
   }
 

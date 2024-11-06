@@ -39,7 +39,7 @@ class _TopMenuState extends State<TopMenu> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        18.horizontalSpace,
+        28.horizontalSpace,
         Center(
           child: PlayButton(
             onTap: () {
@@ -56,18 +56,11 @@ class _TopMenuState extends State<TopMenu> {
             ),
           ),
         ),
-        Expanded(
-          child: SizedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildLeftMenu(),
-                _buildCenterMenu(),
-                0.horizontalSpace
-              ],
-            ),
-          ),
-        )
+        20.horizontalSpace,
+        _buildLeftMenu(),
+        const Spacer(),
+        _buildCenterMenu(),
+        const Spacer(),
       ],
     );
   }
