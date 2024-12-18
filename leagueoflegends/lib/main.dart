@@ -24,6 +24,7 @@ void main() async {
       minimumSize: Size(1280, 520),
       backgroundColor: Colors.black,
       titleBarStyle: TitleBarStyle.hidden,
+      windowButtonVisibility: false,
     );
     await windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.show();
