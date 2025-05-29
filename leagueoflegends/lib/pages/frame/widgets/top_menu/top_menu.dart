@@ -12,10 +12,7 @@ import 'package:leagueoflegends/pages/frame/widgets/top_menu/top_menu_vertical_i
 
 /// 顶部菜单
 class TopMenu extends StatefulWidget {
-  const TopMenu({
-    super.key,
-    this.onChangeMenu,
-  });
+  const TopMenu({super.key, this.onChangeMenu});
 
   final Function(TopMenuType menu)? onChangeMenu;
 
@@ -50,9 +47,7 @@ class _TopMenuState extends State<TopMenu> {
               textHeightBehavior: TextHeightBehavior(
                 applyHeightToLastDescent: false,
               ),
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -99,9 +94,12 @@ class _TopMenuState extends State<TopMenu> {
               AssetsSvgs.worlds_2023Svg,
               width: 24,
               height: 24,
-              color: selectMenu == TopMenuType.world
-                  ? SystemColors.foregroundLightColor
-                  : SystemColors.foregroundColor,
+              colorFilter: ColorFilter.mode(
+                selectMenu == TopMenuType.world
+                    ? SystemColors.foregroundLightColor
+                    : SystemColors.foregroundColor,
+                BlendMode.srcIn,
+              ),
             ),
             selectd: selectMenu == TopMenuType.world,
             onTap: onChangeMenu,
@@ -117,6 +115,9 @@ class _TopMenuState extends State<TopMenu> {
                   width: 24,
                   height: 24,
                   fit: BoxFit.contain,
+                  color: selectMenu == TopMenuType.collection
+                      ? SystemColors.foregroundLightColor
+                      : SystemColors.foregroundColor,
                 ),
                 selectd: selectMenu == TopMenuType.collection,
                 onTap: onChangeMenu,
@@ -133,15 +134,12 @@ class _TopMenuState extends State<TopMenu> {
                         color: Colors.white,
                         blurRadius: 6,
                         spreadRadius: 1,
-                      )
+                      ),
                     ],
                   ),
-                  child: SizedBox(
-                    width: 8,
-                    height: 8,
-                  ),
+                  child: SizedBox(width: 8, height: 8),
                 ),
-              )
+              ),
             ],
           ),
           const TopMenuDivider(),
@@ -153,6 +151,9 @@ class _TopMenuState extends State<TopMenu> {
               width: 24,
               height: 24,
               fit: BoxFit.contain,
+              color: selectMenu == TopMenuType.spoils
+                  ? SystemColors.foregroundLightColor
+                  : SystemColors.foregroundColor,
             ),
             selectd: selectMenu == TopMenuType.spoils,
             onTap: onChangeMenu,
@@ -165,6 +166,9 @@ class _TopMenuState extends State<TopMenu> {
               width: 24,
               height: 24,
               fit: BoxFit.contain,
+              color: selectMenu == TopMenuType.store
+                  ? SystemColors.foregroundLightColor
+                  : SystemColors.foregroundColor,
             ),
             selectd: selectMenu == TopMenuType.store,
             onTap: onChangeMenu,

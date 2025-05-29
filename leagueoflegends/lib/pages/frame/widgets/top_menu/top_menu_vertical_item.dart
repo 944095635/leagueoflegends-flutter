@@ -30,8 +30,8 @@ class TopMenuVerticalItem extends TopMenuItem {
             style: TextStyle(
               fontSize: 12,
               color: super.selectd
-                  ? SystemColors.foregroundLightColor.withOpacity(.9)
-                  : SystemColors.foregroundColor.withOpacity(.8),
+                  ? SystemColors.foregroundLightColor.withAlpha(240)
+                  : SystemColors.foregroundColor.withAlpha(220),
             ),
           ),
         ],
